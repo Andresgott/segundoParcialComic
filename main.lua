@@ -19,4 +19,5 @@ local CH = display.contentHeight
 print("App iniciada en resolución:", CW, CH)
 
 -- Iniciar en la escena de portada
-composer.gotoScene("scenes.portada")
+composer.gotoScene("scenes.menuInicial")
+

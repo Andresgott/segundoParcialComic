@@ -1,6 +1,7 @@
 local composer = require("composer")
 local spiderman = require("spiderman")  -- o "spiderman" si está fuera de scenes
 local animations = require("animations")
+local globals = require("globals")
 local scene = composer.newScene()
 
 local CW = display.contentWidth
@@ -26,7 +27,18 @@ end
 
 local function goToPage1(e)
     if e.phase == "ended" then
-        composer.gotoScene("scenes.page1", { effect = "slideLeft", time = 2000 })
+        composer.gotoScene("scenes.page1", {
+            effect = globals.efectoSeleccionado,
+            time = 300,
+            onComplete = function()
+                -- Transición personalizada usando easing
+                transition.to(scene.view, {
+                    time = 1000,
+                    x = -display.contentWidth,
+                    transition = easing[globals.animacionSeleccionada]
+                })
+            end
+        })
     end
     return true
 end

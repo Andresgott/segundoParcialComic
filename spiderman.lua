@@ -99,9 +99,6 @@ local sequenceData = {
     }
     
 
-
-
-
 }
 
 function M.new(x, y, animation)

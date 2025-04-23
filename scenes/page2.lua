@@ -1,5 +1,9 @@
 local composer = require("composer")
 local scene = composer.newScene()
+local spiderman = require("spiderman")
+local animations = require("animations")
+local globals = require("globals")
+
 
 local CW = display.contentWidth
 local CH = display.contentHeight
@@ -26,22 +30,49 @@ local function moverAdelante(e)
         if indice < #posiciones then
             indice = indice + 1
             local p = posiciones[indice]
+
             transition.to(fondo, {
                 time = 900,
                 xScale = p.xScale,
                 yScale = p.yScale,
                 x = p.x,
                 y = p.y,
-                transition = easing.outQuad
+                transition = easing[globals.animacionSeleccionada]
             })
+
+            -- Borrar spidermans anteriores si es necesario
+            if scene.spidey then
+                scene.spidey:removeSelf()
+                scene.spidey = nil
+            end
+
+            -- Crear Spider-Man según el índice
+            if indice == 6 then
+                scene.spidey = spiderman.new(100, CH - 100, "run")
+                scene.spidey.xScale, scene.spidey.yScale = 2, 2
+                animations.traslado(scene.spidey, 120,850) -- velocidad
+                scene.view:insert(scene.spidey)
+
+            elseif indice == 3 then
+                scene.spidey = spiderman.new(100, CH - 200, "flip2")
+                scene.spidey.xScale, scene.spidey.yScale = 2, 2
+                scene.view:insert(scene.spidey)
+
+            elseif indice == 5 then
+                scene.spidey = spiderman.new(0, 120, "swing")
+                scene.spidey.xScale, scene.spidey.yScale = 2, 2
+                animations.columpiar(scene.spidey)
+                scene.view:insert(scene.spidey)
+            end
+
         elseif indice == #posiciones then
-            -- Espera que termine la última animación antes de cambiar de página
             timer.performWithDelay(1000, function()
-                composer.gotoScene("scenes.page3", { effect = "slideLeft", time = 1000 })
+                composer.gotoScene("scenes.page3", { effect = globals.efectoSeleccionado, time = 1000 })
             end)
         end
     end
 end
+
 
 
 local function moverAtras(e)
@@ -55,11 +86,11 @@ local function moverAtras(e)
                 yScale = p.yScale,
                 x = p.x,
                 y = p.y,
-                transition = easing.outQuad
+                transition = easing[globals.animacionSeleccionada]
             })
         elseif indice == 1 then
             -- Cambiar a página anterior si ya está en la vista completa
-            composer.gotoScene("scenes.page1", { effect = "slideRight", time = 1000 })
+            composer.gotoScene("scenes.page1", { effect = globals.efectoSeleccionado, time = 1000 })
         end
     end
 end

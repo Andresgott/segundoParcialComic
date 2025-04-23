@@ -33,8 +33,8 @@ end
 
 
 function M.traslado(obj, velocidad, destinoX, callback)
-    destinoX = destinoX or display.ActualContentWidth + 50  -- sale del margen por derecha
-    velocidad = velocidad or 100                      -- por defecto 100px/s
+    destinoX = destinoX or display.ActualContentWidth + 50 
+    velocidad = velocidad or 100                      
 
     local distancia = destinoX - obj.x
     local tiempo = (math.abs(distancia) / velocidad) * 1000  

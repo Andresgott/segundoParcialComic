@@ -1,4 +1,7 @@
 local composer = require("composer")
+local spiderman = require("spiderman")
+local animations = require("animations")
+local globals = require("globals")
 local scene = composer.newScene()
 
 local CW = display.contentWidth
@@ -8,7 +11,18 @@ local ACH = display.actualContentHeight
 
 local function moverAdelante(e)
     if e.phase == "ended" then
-        composer.gotoScene("scenes.page2", { effect = "slideLeft", time = 1000 })
+        composer.gotoScene("scenes.page2", {
+            effect = globals.efectoSeleccionado,
+            time = 300,
+            onComplete = function()
+                -- Transición personalizada usando easing
+                transition.to(scene.view, {
+                    time = 1000,
+                    x = -display.contentWidth,
+                    transition = easing[globals.animacionSeleccionada]
+                })
+            end
+        })
     end
 end
 
@@ -78,7 +92,12 @@ function scene:create(event)
         end
     })
 
+    local spidey5 = spiderman.new(ACW * 0.3, ACH *0.95, "crowling")
+    spidey5.xScale=2.7
+    spidey5.yScale=2.7
+
     boton:addEventListener("touch", moverAdelante)
+    animations.traslado(spidey5,50,850)
 end
 
 scene:addEventListener("create", scene)
