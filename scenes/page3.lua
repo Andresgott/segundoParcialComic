@@ -60,7 +60,7 @@ local function moverAdelante(e)
                 scene.view:insert(scene.spidey)
 
             elseif indice == 5 then
-                scene.spidey = spiderman.new(0, 120, "flip")
+                scene.spidey = spiderman.new(100, 220, "flip")
                 scene.spidey.xScale, scene.spidey.yScale = 4, 4
                 scene.view:insert(scene.spidey)
             

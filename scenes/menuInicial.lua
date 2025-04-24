@@ -7,10 +7,17 @@ local CW = display.contentWidth
 local CH = display.contentHeight
 
 local easingOptions = {
-    "linear", "inQuad", "outQuad", "inOutQuad",
-    "inBounce", "outBounce", "inOutBounce",
-    "inSine", "outSine", "inOutSine"
+    "linear",         -- Movimiento constante, sin aceleración.
+    "outBounce",      -- Rebote al final, muy visual.
+    "inBounce",       -- Rebote al inicio.
+    "inOutBounce",    -- Rebote al inicio y al final.
+    "inExpo",         -- Comienza lentísimo y acelera repentinamente.
+    "outExpo",        -- Arranca rápido y termina lentamente.
+    "inOutBack",      -- Hace una reversa leve antes de avanzar.
+    "outElastic",     -- Hace efecto muelle al final, como un resorte.
+    "inElastic",      -- Muelle al principio.
 }
+
 
 local effectOptions = {
     "fade", "slideLeft", "slideRight", "zoomInOut", "crossFade", "flip"

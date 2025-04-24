@@ -1,24 +1,22 @@
 local M = {}
 
 function M.columpiar(obj)
-    local radio = 300        -- amplitud del arco
-    local altura = obj.y      -- altura base
-    local velocidadX = 2      -- cuánto avanza en X por cada paso
+    if not obj or not obj.x then return end
+
+    local radio = 300
+    local altura = obj.y
+    local velocidadX = 2
     local angulo = 0
     local direccion = 1
 
     local function moverPaso()
+        if not obj or not obj.x then return end -- seguridad en cada paso
         if obj.x > display.contentWidth + 100 then return end
 
         angulo = angulo + 2 * direccion
-
-        -- Avanza gradualmente hacia la derecha
         obj.x = obj.x + velocidadX
-
-        -- Oscila en Y como un columpio
         obj.y = altura + radio * math.cos(math.rad(angulo))
 
-        -- Cambiar dirección del ángulo (oscilación)
         if angulo >= 45 then
             direccion = -1
         elseif angulo <= -45 then
