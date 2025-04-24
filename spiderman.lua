@@ -93,7 +93,7 @@ local sequenceData = {
     },
     {
         name = "swing",
-        frames = {32,33,25,32,34,25},
+        frames = {32,33,32,34},
         time = 3000,
         loopCount = 0
     }

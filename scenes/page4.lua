@@ -13,6 +13,8 @@ local ACH = display.actualContentHeight
 local fondo
 local indice = 1
 
+local explosion = audio.loadSound("assets/explosion.wav") 
+
 -- Posiciones de zoom para cada viñeta de la imagen grande (page2.png)
 local posiciones = {
     {xScale = 1, yScale = 1, x = CW / 2, y = CH / 2},                       -- Vista completa
@@ -49,21 +51,22 @@ local function moverAdelante(e)
             -- Crear Spider-Man según el índice
             if indice == 6 then
                 scene.spidey = spiderman.new(100, CH - 100, "run")
-                scene.spidey.xScale, scene.spidey.yScale = 6.7, 6.7
+                scene.spidey.xScale, scene.spidey.yScale = 4, 4
                 animations.traslado(scene.spidey, 120,850) 
                 scene.view:insert(scene.spidey)
 
             elseif indice == 3 then
-                scene.spidey = spiderman.new(100, CH - 200, "crowling")
-                scene.spidey.xScale, scene.spidey.yScale = 3.7, 3.7
-                animations.traslado(scene.spidey, 50,850)
+                scene.spidey = spiderman.new(500, CH - 200, "damage")
+                scene.spidey.xScale, scene.spidey.yScale = 4, 4
                 scene.view:insert(scene.spidey)
 
             elseif indice == 5 then
                 scene.spidey = spiderman.new(0, 120, "swing")
-                scene.spidey.xScale, scene.spidey.yScale = 3.7, 3.7
+                scene.spidey.xScale, scene.spidey.yScale = 4, 4
                 animations.columpiar(scene.spidey)
                 scene.view:insert(scene.spidey)
+            elseif indice == 2 then
+                audio.play(explosion)
             end
 
         elseif indice == #posiciones then

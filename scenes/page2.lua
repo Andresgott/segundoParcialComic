@@ -48,19 +48,18 @@ local function moverAdelante(e)
 
             -- Crear Spider-Man según el índice
             if indice == 6 then
-                scene.spidey = spiderman.new(100, CH - 100, "run")
-                scene.spidey.xScale, scene.spidey.yScale = 2, 2
-                animations.traslado(scene.spidey, 120,850) -- velocidad
+                scene.spidey = spiderman.new(100, CH - 100, "attack")
+                scene.spidey.xScale, scene.spidey.yScale = 4, 4
                 scene.view:insert(scene.spidey)
 
             elseif indice == 3 then
-                scene.spidey = spiderman.new(100, CH - 200, "flip2")
-                scene.spidey.xScale, scene.spidey.yScale = 2, 2
+                scene.spidey = spiderman.new(100, CH - 200, "kick")
+                scene.spidey.xScale, scene.spidey.yScale = 4, 4
                 scene.view:insert(scene.spidey)
 
             elseif indice == 5 then
                 scene.spidey = spiderman.new(0, 120, "swing")
-                scene.spidey.xScale, scene.spidey.yScale = 2, 2
+                scene.spidey.xScale, scene.spidey.yScale = 4, 4
                 animations.columpiar(scene.spidey)
                 scene.view:insert(scene.spidey)
             end

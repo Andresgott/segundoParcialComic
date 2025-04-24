@@ -1,35 +1,37 @@
 local M = {}
 
 function M.columpiar(obj)
-    local paso = 40         
-    local delay = 600        
-    local yMin = 100
-    local yMax = 150
-    local rotacion = 5    
-    local haciaDerecha = true
+    local radio = 300        -- amplitud del arco
+    local altura = obj.y      -- altura base
+    local velocidadX = 2      -- cuánto avanza en X por cada paso
+    local angulo = 0
+    local direccion = 1
 
-    local function mover()
-        if obj.x >= 850 then return end
+    local function moverPaso()
+        if obj.x > display.contentWidth + 100 then return end
 
-        local nuevaRot = haciaDerecha and rotacion or -rotacion
-        haciaDerecha = not haciaDerecha
+        angulo = angulo + 2 * direccion
 
-        local nuevaY = haciaDerecha and yMin or yMax
+        -- Avanza gradualmente hacia la derecha
+        obj.x = obj.x + velocidadX
 
-        transition.to(obj, {
-            time = delay,
-            x = obj.x + paso,
-            y = nuevaY,
-            rotation = nuevaRot,
-            transition = easing.inOutSine,
-            onComplete = mover
-        })
+        -- Oscila en Y como un columpio
+        obj.y = altura + radio * math.cos(math.rad(angulo))
+
+        -- Cambiar dirección del ángulo (oscilación)
+        if angulo >= 45 then
+            direccion = -1
+        elseif angulo <= -45 then
+            direccion = 1
+        end
+
+        timer.performWithDelay(20, moverPaso)
     end
 
-    obj.x = 0
-    obj.y = (yMin + yMax) / 2
-    mover()
+    moverPaso()
 end
+
+
 
 
 function M.traslado(obj, velocidad, destinoX, callback)

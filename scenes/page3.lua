@@ -12,6 +12,9 @@ local ACH = display.actualContentHeight
 local fondo
 local indice = 1
 
+local alarmSound = audio.loadSound("assets/alarm.wav") 
+
+
 -- Posiciones de zoom para cada viñeta de la imagen grande (page2.png)
 local posiciones = {
     {xScale = 1, yScale = 1, x = CW / 2, y = CH / 2},                       -- Vista completa
@@ -39,33 +42,34 @@ local function moverAdelante(e)
                 transition = easing[globals.animacionSeleccionada]
             })
 
-            -- Borrar spidermans anteriores si es necesario
             if scene.spidey then
                 scene.spidey:removeSelf()
                 scene.spidey = nil
             end
 
-            -- Crear Spider-Man según el índice
             if indice == 6 then
                 scene.spidey = spiderman.new(100, CH - 100, "run")
-                scene.spidey.xScale, scene.spidey.yScale = 2.7, 2.7
+                scene.spidey.xScale, scene.spidey.yScale = 4, 4
                 animations.traslado(scene.spidey, 120,850) -- velocidad
                 scene.view:insert(scene.spidey)
 
             elseif indice == 3 then
                 scene.spidey = spiderman.new(100, CH - 200, "crowling")
-                scene.spidey.xScale, scene.spidey.yScale = 2.7, 2.7
+                scene.spidey.xScale, scene.spidey.yScale = 4, 4
                 animations.traslado(scene.spidey, 50,850) -- velocidad
                 scene.view:insert(scene.spidey)
 
             elseif indice == 5 then
-                scene.spidey = spiderman.new(0, 120, "swing")
-                scene.spidey.xScale, scene.spidey.yScale = 2.7, 2.7
-                animations.columpiar(scene.spidey)
+                scene.spidey = spiderman.new(0, 120, "flip")
+                scene.spidey.xScale, scene.spidey.yScale = 4, 4
                 scene.view:insert(scene.spidey)
+            
+            elseif indice==7 then
+                scene.alarmChannel = audio.play(alarmSound)
             end
 
         elseif indice == #posiciones then
+            audio.stop(alarmSound)
             timer.performWithDelay(1000, function()
                 composer.gotoScene("scenes.page4", { effect = globals.efectoSeleccionado, time = 1000 })
             end)
@@ -73,6 +77,13 @@ local function moverAdelante(e)
     end
 end
 
+function scene:hide(event)
+    if event.phase == "will" then
+        if scene.alarmChannel then
+            audio.stop(scene.alarmChannel)
+        end
+    end
+end
 
 local function moverAtras(e)
     if e.phase == "ended" then
@@ -88,7 +99,6 @@ local function moverAtras(e)
                 transition = easing[globals.animacionSeleccionada]
             })
         elseif indice == 1 then
-            -- Cambiar a página anterior si ya está en la vista completa
             composer.gotoScene("scenes.page2", { effect = globals.efectoSeleccionado, time = 1000 })
         end
     end
@@ -117,4 +127,5 @@ function scene:create(event)
 end
 
 scene:addEventListener("create", scene)
+scene:addEventListener("hide", scene)
 return scene
