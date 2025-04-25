@@ -60,8 +60,9 @@ local function moverAdelante(e)
                 scene.view:insert(scene.spidey)
 
             elseif indice == 5 then
-                scene.spidey = spiderman.new(280, CH-200, "flip2")
+                scene.spidey = spiderman.new(0, CH-200, "flip2")
                 scene.spidey.xScale, scene.spidey.yScale = 4, 4
+                animations.traslado(scene.spidey, 70,850)
                 scene.view:insert(scene.spidey)
             elseif indice == 2 then
                 audio.play(explosion)
