@@ -53,9 +53,12 @@ local function moverAdelante(e)
                 scene.view:insert(scene.spidey)
 
             elseif indice == 3 then
-                scene.spidey = spiderman.new(100, CH - 200, "kick")
+                scene.spidey = spiderman.new(320, CH - 500, "kick")
                 scene.spidey.xScale, scene.spidey.yScale = 4, 4
                 scene.view:insert(scene.spidey)
+                timer.performWithDelay(1000, function()
+                    animations.traslado(scene.spidey, 140, 360)
+                end)
 
             elseif indice == 5 then
                 scene.spidey = spiderman.new(0, 120, "swing")
