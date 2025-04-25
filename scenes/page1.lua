@@ -98,6 +98,29 @@ function scene:create(event)
 
     boton:addEventListener("touch", moverAdelante)
     animations.traslado(spidey5,50,850)
+
+
+    local flechaPortada = display.newImageRect(sceneGroup, "assets/Flecha_izquierda.png", 100, 130)
+    flechaPortada.x = 70
+    flechaPortada.y = CH - 70
+    flechaPortada.alpha = 0
+
+    transition.to(flechaPortada, {
+        delay = 1800,
+        time = 800,
+        alpha = 1
+    })
+
+    flechaPortada:addEventListener("touch", function(e)
+        if e.phase == "ended" then
+            composer.gotoScene("scenes.portada", {
+                effect = globals.efectoSeleccionado,
+                time = 1000
+            })
+        end
+        return true
+    end)
+
 end
 
 scene:addEventListener("create", scene)

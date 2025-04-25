@@ -79,6 +79,28 @@ function scene:create(event)
 
     -- Navegación al tocar fondo
     bg:addEventListener("touch", goToPage1)
+
+    -- Flecha de regreso a portada
+    local flechaPortada = display.newImageRect(sceneGroup, "assets/Flecha_izquierda.png", 100, 130)
+    flechaPortada.x = 70
+    flechaPortada.y = CH - 70
+    flechaPortada.alpha = 0
+
+    transition.to(flechaPortada, {
+        delay = 1800,
+        time = 800,
+        alpha = 1
+    })
+
+    flechaPortada:addEventListener("touch", function(e)
+        if e.phase == "ended" then
+            composer.gotoScene("scenes.menuInicial", {
+                effect = globals.efectoSeleccionado,
+                time = 1000
+            })
+        end
+        return true
+    end)
 end
 
 scene:addEventListener("create", scene)

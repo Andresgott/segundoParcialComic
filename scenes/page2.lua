@@ -113,6 +113,7 @@ function scene:create(event)
     flechaDer.x = CW - 70
     flechaDer.y = CH - 70
     flechaDer:addEventListener("touch", moverAdelante)
+    
 end
 
 scene:addEventListener("create", scene)

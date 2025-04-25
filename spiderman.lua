@@ -16,9 +16,9 @@ local sheetOptions = {
         { x=0, y=150, width=40, height=32 }, --12 --fila4
         { x=60, y=150, width=42, height=32 }, --13 --fila4
         { x=0, y=184, width=45, height=48}, --14 --fila5
-        { x=56, y=184, width=54, height=48}, --15 --fila5
-        { x=118, y=184, width=46, height=48}, --16  --fila5
-        { x=169, y=184, width=54, height=48}, --17 --fila5
+        { x=56, y=196, width=54, height=36}, --15 --fila5
+        { x=118, y=196, width=46, height=36}, --16  --fila5
+        { x=169, y=196, width=54, height=36}, --17 --fila5
         { x=0, y=240, width=39, height=56 }, --18 --fila6
         { x=45, y=240, width=42, height=56 }, --19 --fila6
         { x=86, y=240, width=42, height=56 }, --20 --fila6
@@ -33,9 +33,9 @@ local sheetOptions = {
         { x=57, y=350, width=62, height=48}, --29 --fila8
         { x=118, y=350, width=57, height=48}, --30 --fila8
         { x=170, y=350, width=70, height=48}, --31 --fila8
-        { x=0, y=410, width=62, height=48}, --32 --fila9
-        { x=57, y=410, width=62, height=48}, --33 --fila9
-        { x=120, y=410, width=62, height=48}, --34 --fila9
+        { x=0, y=405, width=58, height=42}, --32 --fila9
+        { x=57, y=405, width=58, height=42}, --33 --fila9
+        { x=120, y=405, width=58, height=42}, --34 --fila9
     }
 }
 

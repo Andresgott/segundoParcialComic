@@ -10,7 +10,7 @@ function M.columpiar(obj)
     local direccion = 1
 
     local function moverPaso()
-        if not obj or not obj.x then return end -- seguridad en cada paso
+        if not obj or not obj.x then return end 
         if obj.x > display.contentWidth + 100 then return end
 
         angulo = angulo + 2 * direccion

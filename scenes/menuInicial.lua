@@ -5,6 +5,9 @@ local globals = require("globals")
 
 local CW = display.contentWidth
 local CH = display.contentHeight
+local ACW = display.actualContentWidth
+local ACH = display.actualContentHeight
+
 
 local easingOptions = {
     "linear",         -- Movimiento constante, sin aceleración.
@@ -28,6 +31,13 @@ local effectIndex = 1
 
 function scene:create(event)
     local sceneGroup = self.view
+
+    -- Fondo
+    local fondo = display.newImageRect(sceneGroup, "assets/back1.jpg", ACW, ACH)
+    fondo.anchorX = 0
+    fondo.anchorY = 0
+    fondo.x = 0
+    fondo.y = 0
 
     local title1 = display.newText({
         text = "Animación entre cuadros (easing)",
